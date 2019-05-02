@@ -13,7 +13,7 @@ Middlewares/extentions used:
 * `Mocha <http://mochajs.org/>`_ and `Superagent <http://visionmedia.github.io/superagent/>`_ for testing
 * ... and `others <https://github.com/komarserjio/notejam/blob/express/express/notejam/package.json>`_
 
-==========================
+
 Installation and launching
 ==========================
 
@@ -36,14 +36,14 @@ Install dependencies
 
 .. code-block:: bash
 
-    $ cd YOUR_PROJECT_DIR/express/notejam/
+    $ cd YOUR_PROJECT_DIR/
     $ npm install
 
 Create database schema
 
 .. code-block:: bash
 
-    $ cd YOUR_PROJECT_DIR/express/notejam/
+    $ cd YOUR_PROJECT_DIR/
     $ node db.js
 
 ------
@@ -54,7 +54,7 @@ Start built-in web server:
 
 .. code-block:: bash
 
-    $ cd YOUR_PROJECT_DIR/express/notejam/
+    $ cd YOUR_PROJECT_DIR/
     $ DEBUG=* ./bin/www
 
 Go to http://127.0.0.1:3000/ in your browser
@@ -67,10 +67,40 @@ Run unit tests:
 
 .. code-block:: bash
 
-    $ cd YOUR_PROJECT_DIR/express/notejam/
+    $ cd YOUR_PROJECT_DIR/
     $ ./node_modules/mocha/bin/mocha tests
 
-============
+
+---------------------
+Deploy infrastructure
+---------------------
+
+run the following commands
+
+    $ cd YOUR_PROJECT_DIR/
+
+Create Required IAM ROle 
+
+    aws cloudformation create-stack --stack-name iam --template-body file://$PWD/iam.yaml --capabilities CAPABILITY_IAM
+
+Create VPC and Networking
+
+    aws cloudformation create-stack --stack-name vpc-prod1 --template-body file://$PWD/vpc.yaml --parameters file://$PWD/environment/prod/vpc.json
+
+Create ECS Cluster 
+
+    $aws cloudformation create-stack --stack-name app-cluster-prod --template-body file://$PWD/infra/app-cluster.yaml --parameters file://$PWD/infra/environment/prod/app-cluster.json
+
+Create Services and tasks for the ECS cluster
+
+    aws cloudformation create-stack --stack-name api-prod --template-body file://$PWD/api.yaml --parameters file://$PWD/environment/prod/api.json
+
+Create Database
+
+    aws cloudformation create-stack --stack-name rds-prod --template-body file://$PWD/rds.yaml --parameters file://$PWD/environment/prod/rds.json
+
+
+
 Contribution
 ============
 
