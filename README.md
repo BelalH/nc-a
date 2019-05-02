@@ -85,7 +85,7 @@ Create Required IAM ROle
 
 Create VPC and Networking
 
-    aws cloudformation create-stack --stack-name vpc-prod1 --template-body file://$PWD/vpc.yaml --parameters file://$PWD/environment/prod/vpc.json
+    aws cloudformation create-stack --stack-name vpc-prod --template-body file://$PWD/vpc.yaml --parameters file://$PWD/environment/prod/vpc.json
 
 Create ECS Cluster 
 
