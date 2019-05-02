@@ -76,6 +76,8 @@ Deploy infrastructure
 ---------------------
 Before running any of the following commands make sure your credentials have the required region in it
 
+    $ cat ~/.aws/credentials
+    
     [default]
     aws_access_key_id     = <aws_access_key_id>
     aws_secret_access_key = <aws_secret_access_key>
