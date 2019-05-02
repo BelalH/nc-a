@@ -1,0 +1,14 @@
+[
+  {
+    "ParameterKey": "vpcParam",
+    "ParameterValue": "vpc-prod"
+  },
+  {
+    "ParameterKey": "subnet1",
+    "ParameterValue": "subnet3"
+  },
+  {
+    "ParameterKey": "subnet2",
+    "ParameterValue": "subnet4"
+  }
+]

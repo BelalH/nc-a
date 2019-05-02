@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: create rds
+
+Parameters: 
+  storage: 
+    Type: String
+    Default: 20
+  dbClass:
+    Type: String
+    Default: db.t2.micro
+  rds:
+    Type: String
+    Default: notejame
+
+Resources:
+  MyDB:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      AllocatedStorage: !Ref storage
+      DBInstanceClass: !Ref dbClass
+      DBName: !Ref rds
+      DBSecurityGroups:
+      - Ref: DbSecurityByEC2SecurityGroup
+      DBSubnetGroupName:
+        Ref: MyDBSubnetGroup
+      Engine: MySQL
+      MasterUserPassword: belal123
+      MasterUsername: notejam
+
+  DbSecurityByEC2SecurityGroup:
+    Type: AWS::RDS::DBSecurityGroup
+    Properties:
+      GroupDescription: Ingress for Amazon EC2 security group
+      EC2VpcId: !ImportValue VPC
+  
+  MyDBSubnetGroup: 
+    Type: "AWS::RDS::DBSubnetGroup"
+    Properties: 
+      DBSubnetGroupDescription: create subnet group for rds
+      SubnetIds: 
+        - !ImportValue Subnet1
+        - !ImportValue Subnet2

@@ -1,0 +1,14 @@
+[
+  {
+    "ParameterKey": "storage",
+    "ParameterValue": "20"
+  },
+  {
+    "ParameterKey": "dbClass",
+    "ParameterValue": "db.t2.large"
+  },
+  {
+    "ParameterKey": "rds",
+    "ParameterValue": "notejam2"
+  }
+]
