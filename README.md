@@ -71,13 +71,43 @@ Run unit tests:
     $ ./node_modules/mocha/bin/mocha tests
 
 
+------------------
+ECR initialization
+------------------
+
+login
+    $ aws ecr get-login --region ap-southeast-1 --no-include-email
+    $ docker login -u AWS -p <...rest of command>
+    $ aws ecr create-repository --repository-name <repo-name>
+
+the previouse command should show the repository url, make sure you copy it because you are going to need it in the incoming commands 
+
+------------------
+Run Docker
+------------------
+
+Build project 
+
+    $ docker build -t <repo-name>:latest .
+    $ docker images
+
+Run project on local device over port 3000
+
+    $ docker run -it --expose 3000 -p 3000:3000 <image-id>
+    
+Push Project to ECR
+
+    $ docker tag <repo=name>:latest <repo-url>/<repo-name>:latest
+    $ docker push <repo-url>/<repo-name>:latest
+
+
 ---------------------
 Deploy infrastructure
 ---------------------
 Before running any of the following commands make sure your credentials have the required region in it
 
     $ cat ~/.aws/credentials
-    
+
     [default]
     aws_access_key_id     = <aws_access_key_id>
     aws_secret_access_key = <aws_secret_access_key>
