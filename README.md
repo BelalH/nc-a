@@ -74,8 +74,10 @@ Run unit tests:
 ------------------
 ECR initialization
 ------------------
+ECR is used to manage code versions, this is going to be helpful to manage deploying to ECS 
 
 login
+
     $ aws ecr get-login --region ap-southeast-1 --no-include-email
     $ docker login -u AWS -p <...rest of command>
     $ aws ecr create-repository --repository-name <repo-name>
