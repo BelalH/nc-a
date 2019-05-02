@@ -74,6 +74,13 @@ Run unit tests:
 ---------------------
 Deploy infrastructure
 ---------------------
+Before running any of the following commands make sure your credentials have the required region in it
+
+    [default]
+    aws_access_key_id     = <aws_access_key_id>
+    aws_secret_access_key = <aws_secret_access_key>
+    region                = ap-southeast-1
+
 
 run the following commands
 
